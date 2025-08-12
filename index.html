@@ -1,32 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Freelancer Finance Hub</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.6; }
+    body { font-family: Arial, sans-serif; margin: 1.5rem; line-height: 1.6; }
     header { margin-bottom: 2rem; }
-    nav ul { list-style: none; padding: 0; }
-    nav li { display: inline-block; margin-right: 1rem; }
-    article { margin-bottom: 3rem; }
-    footer { border-top: 1px solid #ccc; padding-top: 1rem; text-align: center; }
+    h1 { margin: 0 0 0.5rem 0; }
+    #search { width: 100%; max-width: 400px; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+    #posts ul { list-style: none; padding: 0; }
+    #posts li { margin: 0.5rem 0; }
+    #posts a { text-decoration: none; color: #0066cc; }
+    #posts a:hover { text-decoration: underline; }
+    .tool-box { border: 1px solid #ddd; border-radius: 6px; padding: 1rem; margin-bottom: 1rem; }
+    .tool-box h3 { margin: 0 0 0.3rem; }
+    .tool-box a { color: #0066cc; }
+    .cta { position: fixed; bottom: 0; left: 0; width: 100%; background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 1rem; text-align: center; }
+    .cta button { background: #007bff; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; font-size: 1rem; cursor: pointer; }
+    .cta button:hover { background: #0056b3; }
+    @media (max-width: 600px) { .tool-box { padding: 0.5rem; } }
   </style>
 </head>
 <body>
   <header>
     <h1>Freelancer Finance Hub</h1>
     <p>Your resource for budgeting, finance tools and personal‑finance tips tailored to freelancers.</p>
-    <nav>
-      <ul>
-        <li><a href="post1.html">Top 5 Budgeting Apps</a></li>
-        <li><a href="post2.html">Emergency Fund Guide</a></li>
-        <li><a href="post3.html">Accounting Software Comparison</a></li>
-      </ul>
-    </nav>
+    <input id="search" type="text" placeholder="Search articles…" />
   </header>
-  <footer>
-    <p>&copy; 2025 Freelancer Finance Hub.  All rights reserved.</p>
-  </footer>
+
+  <section id="posts">
+    <h2>Articles</h2>
+    <ul id="postList"></ul>
+  </section>
+
+  <section id="tools">
+    <h2>Recommended Tools</h2>
+    <div class="tool-box">
+      <h3>YNAB (You Need A Budget)</h3>
+      <p>Zero‑based budgeting app perfect for irregular income. Assign every dollar a job.</p>
+      <a href="#">Learn more</a>
+    </div>
+    <div class="tool-box">
+      <h3>FreshBooks</h3>
+      <p>Accounting and invoicing software with time tracking. Great for freelancers.</p>
+      <a href="#">Try FreshBooks</a>
+    </div>
+    <div class="tool-box">
+      <h3>Wave</h3>
+      <p>Free invoicing and accounting software. Ideal for budget‑conscious freelancers.</p>
+      <a href="#">Sign up for Wave</a>
+    </div>
+  </section>
+
+  <div class="cta">
+    <strong>Download our free budgeting spreadsheet!</strong>
+    <button onclick="window.location.href='https://example.com/free-budget-template'">Get it now</button>
+  </div>
+
+  <script>
+    const articles = [
+      { title: 'Top 5 Budgeting Apps', url: 'top-budgeting-apps.html' },
+      { title: 'Emergency Fund Guide', url: 'emergency-fund.html' },
+      { title: 'Accounting Software Comparison', url: 'best-accounting.html' },
+      { title: 'Bank Accounts Setup', url: 'bank-accounts-setup.html' },
+      { title: 'Freelancer Taxes Basics', url: 'freelancer-taxes-basics.html' },
+      { title: 'Gear Deductions Explained', url: 'gear-deductions.html' },
+      { title: 'Pricing Tiers for Freelancers', url: 'pricing-tiers.html' },
+      { title: 'Invoice Like a Pro', url: 'invoice-like-a-pro.html' }
+    ];
+
+    function renderList(filter = '') {
+      const list = document.getElementById('postList');
+      list.innerHTML = '';
+      const filtered = articles.filter(a => a.title.toLowerCase().includes(filter.toLowerCase()));
+      filtered.forEach(a => {
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = a.url;
+        link.textContent = a.title;
+        li.appendChild(link);
+        list.appendChild(li);
+      });
+    }
+
+    document.getElementById('search').addEventListener('keyup', function () {
+      renderList(this.value);
+    });
+
+    renderList();
+  </script>
 </body>
 </html>
